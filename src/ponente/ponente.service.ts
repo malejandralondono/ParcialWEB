@@ -1,10 +1,11 @@
+/* eslint-disable @typescript-eslint/no-unsafe-enum-comparison */
 /* eslint-disable prettier/prettier */
 /* archivo: src/ponente/ponente.service.ts */
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { BusinessError, BusinessLogicException } from 'src/shared/errors/business-errors';
 import { Repository } from 'typeorm';
-import { PonenteEntity } from './ponente.entity/ponente.entity';
+import { PonenteEntity, TipoPonente } from './ponente.entity/ponente.entity';
 
 @Injectable()
 export class PonenteService {
@@ -15,7 +16,7 @@ export class PonenteService {
 
    async crearPonente(ponente: PonenteEntity): Promise<PonenteEntity> {
 
-       if (ponente.tipoPonente === "Interno") {
+       if (ponente.tipoPonente === TipoPonente.INTERNO) {
            if (!ponente.email.endsWith(".edu")) {
                throw new BusinessLogicException(
                    "Si es Interno, el email debe terminar en .edu",
@@ -24,7 +25,7 @@ export class PonenteService {
            }
        }
 
-       if (ponente.tipoPonente === "Invitado") {
+       if (ponente.tipoPonente === TipoPonente.INVITADO) {
            if (!ponente.email.includes("@") || !ponente.email.split("@")[1]?.includes(".")) {
                throw new BusinessLogicException(
                    "Si es Invitado, el email debe ser válido (contener \"@\" y dominio)",

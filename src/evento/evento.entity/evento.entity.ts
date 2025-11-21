@@ -4,6 +4,12 @@ import { AuditorioEntity } from 'src/auditorio/auditorio.entity/auditorio.entity
 import { PonenteEntity } from 'src/ponente/ponente.entity/ponente.entity';
 import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
+export enum Estado {
+    PROPUESTO = "Propuesto",
+    APROBADO = "Aprobado",
+    RECHAZADO= "Rechazado"
+}
+
 @Entity()
 export class EventoEntity {
     @PrimaryGeneratedColumn('uuid')
@@ -21,8 +27,11 @@ export class EventoEntity {
     @Column()
     duraciónHoras: number;
     
-    @Column()
-    estado: string;
+    @Column({
+            type: 'enum',
+            enum: Estado,
+        })
+    estado: Estado;
     
     @ManyToOne(() => PonenteEntity, ponente => ponente.eventos)
     ponente: PonenteEntity;

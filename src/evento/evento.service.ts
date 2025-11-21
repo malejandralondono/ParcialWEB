@@ -1,10 +1,11 @@
+/* eslint-disable @typescript-eslint/no-unsafe-enum-comparison */
 /* eslint-disable prettier/prettier */
 /* archivo: src/evento/evento.service.ts */
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { BusinessError, BusinessLogicException } from '../shared/errors/business-errors';
 import { Repository } from 'typeorm';
-import { EventoEntity } from './evento.entity/evento.entity';
+import { Estado, EventoEntity } from './evento.entity/evento.entity';
 import { PonenteEntity } from '../ponente/ponente.entity/ponente.entity';
 
 @Injectable()
@@ -69,7 +70,7 @@ export class EventoService {
            );
        }
 
-         evento.estado = 'Aprobado';
+         evento.estado = Estado.APROBADO;
 
 
        return await this.eventoRepository.save(evento);
