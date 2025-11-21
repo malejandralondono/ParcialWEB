@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 /*Archivo src/main.ts */
 
 import { VersioningType } from '@nestjs/common';
@@ -14,3 +15,5 @@ async function bootstrap() {
   await app.listen(3000);
 }
 void bootstrap();
+
+
